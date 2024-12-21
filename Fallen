@@ -1,0 +1,24 @@
+--[[ Keybinds:
+
+Freecam - K
+  T - Forward
+  F - Left
+  Y - Down
+  H - Right
+
+  X - Zoom Out
+]]
+
+local scripts = {
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/X%20Zoom%20Out',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/UDfreecam',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/Amongus'
+}
+
+for _, url in ipairs(scripts) do
+    local thread = coroutine.create(function()
+        loadstring(game:HttpGet(url, true))()
+    end)
+    coroutine.resume(thread)
+end
+table.insert(scripts, "new_script_url")
