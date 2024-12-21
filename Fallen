@@ -1,10 +1,12 @@
---[[ Freecam Control:
+--[[ 
+Activate Freecam: K
 
 T - Forward
 F - Left
 Y - Down
 H - Right
 
+X - Zoom Out
 ]]
 
 local scripts = {
