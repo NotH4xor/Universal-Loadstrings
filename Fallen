@@ -1,16 +1,13 @@
 --[[ Keybinds:
 
 Freecam - K
-  T - Forward
-  F - Left
-  Y - Down
-  H - Right
-  X - ZoomOut
+  F - Forward
+  V - Back
 ]]
 
 local scripts = {
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/X%20Zoom%20Out',
-    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/UDfreecam',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/FreecamRotationFixed',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/Amongus',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/NameESP'
 }
