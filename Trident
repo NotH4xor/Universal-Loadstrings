@@ -11,6 +11,7 @@ local scripts = {
     'https://raw.githubusercontent.com/NotH4xor/trident/refs/heads/main/ATV_Fly',
     'https://raw.githubusercontent.com/NotH4xor/trident/refs/heads/main/CameraFix',
     'https://raw.githubusercontent.com/NotH4xor/trident/refs/heads/main/RaidWithATV',
+    'https://raw.githubusercontent.com/1337h4xx/1/refs/heads/main/swimhub',
     'https://raw.githubusercontent.com/NotH4xor/trident/refs/heads/main/AntiAdminKick'
 }
 
