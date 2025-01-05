@@ -1,0 +1,23 @@
+--[[ Keybinds:
+
+Freecam - K
+  F - Forward
+  V - Back
+]]
+
+local scripts = {
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/X%20Zoom%20Out',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/FreecamRotationFixed',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/Amongus',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/NameESP',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/ObjectsFinder',
+    'https://raw.githubusercontent.com/NotH4xor/Universal-Loadstrings/main/Boat'
+}
+
+for _, url in ipairs(scripts) do
+    local thread = coroutine.create(function()
+        loadstring(game:HttpGet(url, true))()
+    end)
+    coroutine.resume(thread)
+end
+table.insert(scripts, "new_script_url")
