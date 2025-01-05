@@ -10,8 +10,7 @@ local scripts = {
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/FreecamRotationFixed',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/refs/heads/main/Amongus',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/NameESP',
-    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/ObjectsFinder',
-    'https://raw.githubusercontent.com/NotH4xor/Universal-Loadstrings/main/Boat'
+    'https://raw.githubusercontent.com/NotH4xor/Universal-Loadstrings/refs/heads/main/ESP1.0'
 }
 
 for _, url in ipairs(scripts) do
