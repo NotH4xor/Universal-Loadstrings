@@ -1,0 +1,120 @@
+local userInput = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local currentCamera = workspace.CurrentCamera
+local players = game:GetService("Players")
+local localPlayer = players.LocalPlayer
+
+local keyToToggleFly = Enum.KeyCode.N
+local flySpeed = 85
+local rotateSpeed = math.rad(4) -- using radians for rotational speed
+
+local flying = false
+local connections = {}
+local flyObjects = {}
+
+local criteriaList = {
+  {partName="EngineRotator",partSize=Vector3.new(0.5, 0.5, 0.5)}
+}
+
+local function isMatchingSize(partSize, targetSize, tolerance)
+    tolerance = tolerance or 0.001
+    return math.abs(partSize.X - targetSize.X) <= tolerance and
+        math.abs(partSize.Y - targetSize.Y) <= tolerance and
+        math.abs(partSize.Z - targetSize.Z) <= tolerance
+end
+
+local function matchesCriteria(part)
+    for _, criteria in ipairs(criteriaList) do
+        if part:IsA("BasePart") and part.Name == criteria.partName and isMatchingSize(part.Size, criteria.partSize) then
+            return true
+        end
+    end
+    return false
+end
+
+local function controlFly(targetPart)
+    local flyVector = Vector3.new(0, 0, 0)
+    local rotateCFrame = CFrame.new()
+
+    if not userInput:GetFocusedTextBox() and flying then
+        if userInput:IsKeyDown(Enum.KeyCode.W) then
+            flyVector = flyVector + currentCamera.CFrame.LookVector * flySpeed
+        end
+if userInput:IsKeyDown(Enum.KeyCode.A) then
+            flyVector = flyVector - currentCamera.CFrame.RightVector * flySpeed
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.S) then
+            flyVector = flyVector - currentCamera.CFrame.LookVector * flySpeed
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.D) then
+            flyVector = flyVector + currentCamera.CFrame.RightVector * flySpeed
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.F) then
+            flyVector = flyVector + currentCamera.CFrame.UpVector * flySpeed
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.LeftControl) then
+            flyVector = flyVector - currentCamera.CFrame.UpVector * flySpeed
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.R) then
+            rotateCFrame = rotateCFrame * CFrame.Angles(0, -rotateSpeed, 0)
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.Q) then
+            rotateCFrame = rotateCFrame * CFrame.Angles(0, rotateSpeed, 0)
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.O) then
+            rotateCFrame = rotateCFrame * CFrame.Angles(-rotateSpeed, 0, 0)
+        end
+        if userInput:IsKeyDown(Enum.KeyCode.F) then
+            rotateCFrame = rotateCFrame * CFrame.Angles(rotateSpeed, 0, 0)
+        end
+
+        targetPart.CFrame = targetPart.CFrame * rotateCFrame
+    else
+        targetPart.Velocity = Vector3.new()
+        targetPart.RotVelocity = Vector3.new()
+    end
+
+    targetPart.Velocity = flyVector
+end
+
+userInput.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == keyToToggleFly then
+        flying = not flying
+        if flying then
+            for _, obj in ipairs(flyObjects) do
+                obj.Anchored = false -- ensure part is not anchored
+                local conn = runService.Heartbeat:Connect(function()
+                    controlFly(obj)
+                end)
+                table.insert(connections, conn)
+            end
+        else
+            for _, conn in ipairs(connections) do
+                conn:Disconnect()
+            end
+            connections = {}
+        end
+    end
+end)
+
+workspace.DescendantAdded:Connect(function(descendant)
+    if matchesCriteria(descendant) then
+        table.insert(flyObjects, descendant)
+    end
+end)
+
+workspace.DescendantRemoving:Connect(function(descendant)
+    for index, obj in ipairs(flyObjects) do
+        if obj == descendant then
+            table.remove(flyObjects, index)
+            break
+        end
+    end
+end)
+
+for _, descendant in ipairs(workspace:GetDescendants()) do
+    if matchesCriteria(descendant) then
+        table.insert(flyObjects, descendant)
+    end
+end
