@@ -1,17 +1,12 @@
+-- Working!!! I successfully removed Freecam. Thanks to chatgpt
 local a = game:GetService("Players")
 local b = game:GetService("RunService")
 local c = workspace.CurrentCamera
 local d = a.LocalPlayer
 local e = game:GetService("UserInputService")
-local f = game:GetService("ContextActionService")
 local g = {}
 local h = true
-local i = Enum.KeyCode.K
-local j = Enum.KeyCode.Y
-local k = 0.7
-local l = false
-local m
-local drawingsEnabled = true -- New variable to toggle drawings
+local drawingsEnabled = true
 local n = {
     {partName = "Main", partSize = Vector3.new(4.184000015258789, 6.843999862670898, 2.950000047683716), espLabel = "TC", espColor = Color3.new(0, 1, 0)},
     {partName = "EngineRotator", partSize = Vector3.new(0.5, 0.5, 0.5), espLabel = "BOAT", espColor = Color3.new(1, 0, 0.749020)},
@@ -87,71 +82,9 @@ for _, C in ipairs(workspace:GetDescendants()) do
     end
 end
 
-local function E(F, G, H)
-    return Enum.ContextActionResult.Sink
-end
-
-local function I()
-    l = not l
-    if l then
-        m = c.CFrame
-        f:BindAction("DisableMovement", E, false, Enum.KeyCode.W, Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.D, Enum.KeyCode.Space, Enum.KeyCode.LeftShift)
-    else
-        f:UnbindAction("DisableMovement")
-        local J = d.Character
-        if J and J:FindFirstChild("HumanoidRootPart") then
-            c.CFrame = J.HumanoidRootPart.CFrame
-        end
-    end
-end
-
-local function K()
-    local L = e:GetMouseLocation()
-    local M
-    local N = math.huge
-    for _, D in ipairs(n) do
-        if D.espLabel == "TC" then
-            for _, C in ipairs(workspace:GetDescendants()) do
-                if C:IsA("BasePart") and C.Name == D.partName and o(C.Size, D.partSize) then
-                    local O, B = c:WorldToScreenPoint(C.Position)
-                    if B then
-                        local P = (Vector2.new(O.X, O.Y) - L).Magnitude
-                        if P < N then
-                            N = P
-                            M = C
-                        end
-                    end
-                end
-            end
-        end
-    end
-    if M then
-        c.CFrame = M.CFrame
-        m = M.CFrame
-    end
-end
-
-local function Q()
-    if l then
-        local R = e:GetMouseDelta()
-        m = m * CFrame.Angles(-math.rad(R.Y), -math.rad(R.X), 0)
-        local S = Vector3.new(
-            (e:IsKeyDown(Enum.KeyCode.D) and k or 0) - (e:IsKeyDown(Enum.KeyCode.A) and k or 0),
-            (e:IsKeyDown(Enum.KeyCode.Space) and k or 0) - (e:IsKeyDown(Enum.KeyCode.LeftShift) and k or 0),
-            (e:IsKeyDown(Enum.KeyCode.S) and k or 0) - (e:IsKeyDown(Enum.KeyCode.W) and k or 0)
-        )
-        m = m * CFrame.new(S)
-        c.CFrame = m
-    end
-end
-
 e.InputBegan:Connect(function(T, U)
     if not U then
-        if T.KeyCode == i then
-            I()
-        elseif T.KeyCode == j then
-            K()
-        elseif T.KeyCode == Enum.KeyCode.T then -- Toggle key for drawings
+        if T.KeyCode == Enum.KeyCode.T then -- Toggle key for drawings
             drawingsEnabled = not drawingsEnabled
             if not drawingsEnabled then
                 for _, w in pairs(g) do
@@ -163,4 +96,3 @@ e.InputBegan:Connect(function(T, U)
 end)
 
 b.RenderStepped:Connect(y)
-b.RenderStepped:Connect(Q)
