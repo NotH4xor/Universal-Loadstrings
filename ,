@@ -16,7 +16,7 @@ local scripts = {
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/X%20Zoom%20Out',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/Amongus',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/NameESP',
-    'https://raw.githubusercontent.com/NotH4xor/Universal-Loadstrings/main/FreecamUD(MASTERED)'
+    'https://raw.githubusercontent.com/NotH4xor/Universal-Loadstrings/main/ESP_UD'
 }
 
 for _, url in ipairs(scripts) do
