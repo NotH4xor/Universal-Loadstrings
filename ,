@@ -1,14 +1,13 @@
 --[[
--------------REMASTERED FREECAM 1.00-------------
-Keybinds:
+--------------------REMASTERED------------------
+ESP Keybinds:
+Toggle esp: T
+Distance: Z
 
-Disable All ESP: T
-
-Activate Freecam: K
-
-TP to TC while in freecam: Y
-
-Player Indicator ESP: Z
+Freecam Keybinds:
+Activate: K
+-    Move Forward: F
+-    Move Backward: V
 -----------------------END-----------------------
 ]]
 
@@ -16,7 +15,8 @@ local scripts = {
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/X%20Zoom%20Out',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/Amongus',
     'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/NameESP',
-    'https://raw.githubusercontent.com/NotH4xor/Universal-Loadstrings/main/ESP_UD'
+    'https://raw.githubusercontent.com/NotH4xor/Universal-Loadstrings/main/ESP_UD',
+    'https://raw.githubusercontent.com/NotH4xor/Fallen-Scripts/main/FreecamRotationFixed'
 }
 
 for _, url in ipairs(scripts) do
